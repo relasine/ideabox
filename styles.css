@@ -1,0 +1,47 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #e5f3f2;
+
+}
+
+h1 {
+  color: #00a79d;
+  font-family: 'Roboto Slab', serif;
+  text-align: center;
+}
+
+span {
+  color: #6d6e71;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.title-input, .body-input, .submit-button {
+  display: block;
+  margin: auto;
+  width: 55%;
+}
+
+::placeholder {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.submit-button {
+  background-color: #00a79d;
+  color: #fff;
+  width: 55.3%;
+  margin-top: .6rem;
+  margin-bottom: .7rem;
+}
+
+.title-input, .body-input {
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}

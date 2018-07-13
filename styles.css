@@ -25,6 +25,7 @@ span {
 
 p {
   font-family: 'Open Sans', sans-serif;
+
 }
 
 .title-input, .body-input, .submit-button, .search {
@@ -62,4 +63,67 @@ form {
 
 .search {
   margin-top: 1rem;
+}
+
+img {
+  width: 1.4em;
+}
+
+h3 {
+   font-family: 'Roboto Slab', serif;
+   color: #6d6e71;
+   margin-bottom: .5rem;
+
+}
+
+article {
+  width: 55.3%;
+  margin: auto;
+}
+
+.delete-button {
+  float: right;
+  margin-top: .1rem;
+}
+
+.idea-body {
+  color: #939598;
+  margin-top: 0;
+  font-size: .9rem;
+}
+
+.quality {
+  color: #6d6e71;
+  line-height: 1.1;
+  margin: 0;
+  float: left;
+  font-family: 'Roboto Slab', serif;
+
+}
+
+.upvote, .downvote {
+  display: inline-block;
+  float: left;
+  margin-right: 1rem;
+}
+
+.button-quality-wrapper {
+
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.active-quality {
+  font-family: 'Open Sans', sans-serif;
+}
+
+hr {
+  margin-top: 1.3rem;
+}
+
+
 }

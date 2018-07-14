@@ -34,6 +34,10 @@ p {
   width: 55%;
 }
 
+textarea {
+  resize: none;
+}
+
 ::placeholder {
   font-family: 'Open Sans', sans-serif;
 }
@@ -126,10 +130,50 @@ hr {
 }
 
 @media(min-width: 1400px) {
-  .title-input, .body-input, .search, article{
+  .title-input, .body-input, .search, article {
     max-width: 48.125rem;
   }
   .submit-button {
     max-width: 48.3875rem;
   }
+}
+
+/*@media(max-width: 700px) {
+  .title-input, .body-input, .search, article { 
+    width: 90%;
+
+  }
+  .submit-button {
+    width: 90%;
+
+  }
+}*/
+
+@media(max-width: 700px) {
+ .title-input, .body-input, .search, article{
+   min-width: 24.0625rem;
+ }
+.body-input {
+  height: 2.4375rem;
+  padding-top: 0;
+  /*vertical-align: text-top;*/
+      line-height: normal;
+}
+
+::placeholder {
+
+}
+
+ .submit-button {
+   min-width: 24.19375rem;
+ }
+}
+
+@media(max-width: 417px) {
+  .title-input, .body-input, .search, article{
+    min-width: 92.326%;
+  }
+  .submit-button {
+  min-width: 92.829%;
+}
 }

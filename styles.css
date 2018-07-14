@@ -125,5 +125,11 @@ hr {
   margin-top: 1.3rem;
 }
 
-
+@media(min-width: 1400px) {
+  .title-input, .body-input, .search, article{
+    max-width: 48.125rem;
+  }
+  .submit-button {
+    max-width: 48.3875rem;
+  }
 }

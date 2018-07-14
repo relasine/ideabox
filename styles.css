@@ -34,8 +34,12 @@ p {
   width: 55%;
 }
 
-textarea {
+.body-input {
   resize: none;
+  height: .8125rem;
+  padding: 1px;
+  line-height: 12px;
+
 }
 
 ::placeholder {
@@ -55,6 +59,7 @@ textarea {
 .title-input, .body-input, .search {
   margin-top: .5rem;
   margin-bottom: .5rem;
+  border: 1px solid lightgray;
 }
 
 .title-input {
@@ -149,6 +154,8 @@ hr {
   }
 }*/
 
+
+
 @media(max-width: 700px) {
  .title-input, .body-input, .search, article{
    min-width: 24.0625rem;
@@ -156,8 +163,7 @@ hr {
 .body-input {
   height: 2.4375rem;
   padding-top: 0;
-  /*vertical-align: text-top;*/
-      line-height: normal;
+
 }
 
 ::placeholder {

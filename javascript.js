@@ -20,37 +20,37 @@ $('.idea-section').on('mouseout', upvoteNoHover);
 
 
 function deleteHover(e) {
-  if (e.target.classList.contains('delete-button')){
+  if ($(e.target).hasClass('delete-button')){
     $(e.target).attr('src', 'images/delete-hover.svg');
   // $('.delete-button').attr('src', 'images/delete-hover.svg');
 }};
 
 function deleteNoHover(e) {
-  if (e.target.classList.contains('delete-button')){
+  if ($(e.target).hasClass('delete-button')){
     $(e.target).attr('src', 'images/delete.svg');
   // $('.delete-button').attr('src', 'images/delete.svg');
 }};
 
 function downvoteHover(e) {
-  if (e.target.classList.contains('downvote')){
+  if ($(e.target).hasClass('downvote')){
     $(e.target).attr('src', 'images/downvote-hover.svg');
   // $('.downvote').attr('src', 'images/downvote-hover.svg');
 }};
 
 function downvoteNoHover(e) {
-    if (e.target.classList.contains('downvote')){
+  if ($(e.target).hasClass('downvote')){
     $(e.target).attr('src', 'images/downvote.svg');
   // $('.downvote').attr('src', 'images/downvote.svg');
 }};
 
 function upvoteHover(e) {
-  if (e.target.classList.contains('upvote')){
+  if ($(e.target).hasClass('upvote')){
     $(e.target).attr('src', 'images/upvote-hover.svg');
   // $('.upvote').attr('src', 'images/upvote-hover.svg');
 }};
 
 function upvoteNoHover(e) {
-    if (e.target.classList.contains('upvote')){
+    if ($(e.target).hasClass('upvote')){
     $(e.target).attr('src', 'images/upvote.svg');
   // $('.upvote').attr('src', 'images/upvote.svg');
 }};
@@ -63,7 +63,7 @@ function upvoteNoHover(e) {
 
 
 ideaSection.on('click', function(e){
-  if (e.target.classList.contains('delete-button')){
+  if ($(e.target).hasClass('delete-button')){
     $(e.target.closest('article').remove());
    var dataId = e.target.parentNode.parentNode.dataset.index;
    var ideaObject = ideasArray.find(function(idea) {

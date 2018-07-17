@@ -5,6 +5,10 @@ var ideaSection = $('.idea-section');
 var submitButton = $('.submit-button');
 var titleInput = $('.title-input');
 var bodyInput = $('.body-input');
+var ideasArray = JSON.parse(localStorage.getItem("storedIdeasArray")) || [];
+console.log(ideasArray); 
+
+
 
 
 $('.idea-section').on('mouseover', deleteHover);
@@ -57,11 +61,19 @@ function upvoteNoHover(e) {
 
 //delete button
 
+
 ideaSection.on('click', function(e){
   if (e.target.classList.contains('delete-button')){
     $(e.target.closest('article').remove());
+   var dataId = e.target.parentNode.parentNode.dataset.index;
+   var ideaObject = ideasArray.find(function(idea) {
+    return idea.id === parseInt(dataId)
+   }) 
+   var index = ideasArray.indexOf(ideaObject)
+   ideasArray.splice(index, 1)
+  localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray));
   }
-  });
+});
 
 
 //create new idea article
@@ -70,19 +82,38 @@ submitButton.on('click', function(e) {
   e.preventDefault();
   var titleValue = titleInput.val();
   var bodyValue = bodyInput.val();
-  ideaSection.append(`<article class="">
-    <div class="wrapper-div">
-       <img class="delete-button" aria-label="delete button" src="images/delete.svg">
-      <h3>${titleValue}</h3>
-    </div>
-    <p class="idea-body">${bodyValue}</p>
-    <div class="button-quality-wrapper clearfix">
-      <img class="upvote" src="images/upvote.svg">
-      <img class="downvote" src="images/downvote.svg">
-      <p class="quality">quality: <span class="active-quality">swill</span></p>
-    </div>
-    <hr>
-  </article>`);
+  var newIdea = new IdeaConstructor(Date.now(), titleValue, bodyValue);
+  ideasArray.push(newIdea);
+  localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray));
+  console.log(ideasArray);
+  generateHTML(newIdea);
   titleInput.val('');
   bodyInput.val('');
 });
+
+function IdeaConstructor(id, title, body) {
+  this.id = id;
+  this.title = title;
+  this.body = body;
+  this.quality = "swill";
+}
+
+
+function generateHTML (object){
+  ideaSection.append(`<article data-index="${object.id}">
+    <div class="wrapper-div">
+       <img class="delete-button" aria-label="delete button" src="images/delete.svg">
+      <h3>${object.title}</h3>
+    </div>
+    <p class="idea-body">${object.body}</p>
+    <div class="button-quality-wrapper clearfix">
+      <img class="upvote" src="images/upvote.svg">
+      <img class="downvote" src="images/downvote.svg">
+      <p class="quality">quality: <span class="active-quality">${object.quality}</span></p>
+    </div>
+    <hr>
+  </article>`);
+}
+
+
+

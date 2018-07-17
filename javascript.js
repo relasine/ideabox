@@ -7,6 +7,22 @@ var titleInput = $('.title-input');
 var bodyInput = $('.body-input');
 var ideasArray = JSON.parse(localStorage.getItem("storedIdeasArray")) || [];
 
+ideasArray.forEach(function(idea) {
+  ideaSection.append(`<article data-index="${idea.id}">
+    <div class="wrapper-div">
+       <img class="delete-button" aria-label="delete button" src="images/delete.svg">
+      <h3>${idea.title}</h3>
+    </div>
+    <p class="idea-body">${idea.body}</p>
+    <div class="button-quality-wrapper clearfix">
+      <img class="upvote" src="images/upvote.svg">
+      <img class="downvote" src="images/downvote.svg">
+      <p class="quality">quality: <span class="active-quality">${idea.quality}</span></p>
+    </div>
+    <hr>
+  </article>`);
+})
+
 $('.idea-section').on('mouseover', deleteHover);
 $('.idea-section').on('mouseout', deleteNoHover);
 $('.idea-section').on('mouseover', downvoteHover);

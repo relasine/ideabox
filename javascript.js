@@ -87,7 +87,7 @@ function deleteExecute(e) {
     if(index === 0) {                                                           //If the object's index is 0    
       ideasArray.shift();                                                       //Use shift to remove it
     } else {                      
-      ideasArray.slice(index, 1);                                              //Otherwise, use slice to remove the object 
+      ideasArray.splice(index, 1);                                              //Otherwise, use splice to remove the object 
     }                                                               
     localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray));       //stringify and put the updated array in local storage
   }

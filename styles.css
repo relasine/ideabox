@@ -56,7 +56,7 @@ p {
   border-width: 0;
 }
 
-.submit-button:disabled {
+.submit-button:focus {
   background-color: #CCCCCC;
 }
 

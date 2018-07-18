@@ -8,22 +8,7 @@ var bodyInput = $('.body-input');
 var searchInput = $('.search');
 var ideasArray = JSON.parse(localStorage.getItem("storedIdeasArray")) || [];
 
-ideasArray.forEach(function(idea) {
-  ideaSection.append(`<article data-index="${idea.id}">
-    <div class="wrapper-div">
-       <img class="delete-button" aria-label="delete button" src="images/delete.svg">
-      <h3 class="idea-title" contenteditable="true" onfocusout="updateTitle()">${idea.title}</h3>
-    </div>
-    <p class="idea-body" contenteditable="true" onfocusout="updateBody()">${idea.body}</p>
-    <div class="button-quality-wrapper clearfix">
-      <img class="upvote" src="images/upvote.svg">
-      <img class="downvote" src="images/downvote.svg">
-      <p class="quality">quality: <span class="active-quality">${idea.quality}</span></p>
-    </div>
-    <hr>
-  </article>`);
-})
-
+$(window).on('load', populateContent);
 $('.title-input').on('keyup', saveButtonEnable);
 $('.body-input').on('keyup', saveButtonEnable);
 $('.body-input').on('keydown', preventReturn);
@@ -45,11 +30,19 @@ function preventReturn(event) {
   }
 }
 
+// function saveButtonEnable() {
+//   if(titleInput.val().length > 0 && bodyInput.val().length > 0) {
+//     submitButton.prop("disabled", false);
+//   } else {
+//     submitButton.prop("disabled", true);;
+//   }
+// }
+
 function saveButtonEnable() {
   if(titleInput.val().length > 0 && bodyInput.val().length > 0) {
-    submitButton.prop("disabled", false);
+  submitButton.css('backgroundColor', '#00a79d');
   } else {
-    submitButton.prop("disabled", true);;
+  submitButton.css('backgroundColor', '#CCCCCC');
   }
 }
 
@@ -94,7 +87,7 @@ function deleteExecute(e) {
     if(index === 0) {                                                           //If the object's index is 0    
       ideasArray.shift();                                                       //Use shift to remove it
     } else {                      
-      ideasArray.splice(index, 1);                                              //Otherwise, use splice to remove the object 
+      ideasArray.slice(index, 1);                                              //Otherwise, use slice to remove the object 
     }                                                               
     localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray));       //stringify and put the updated array in local storage
   }
@@ -103,16 +96,21 @@ function deleteExecute(e) {
 //create new idea article
 
 function submitExecute(e) {
-  e.preventDefault();
-  var titleValue = titleInput.val();                                            
-  var bodyValue = bodyInput.val();
-  var newIdea = new IdeaConstructor(Date.now(), titleValue, bodyValue);         //run the constructor function
-  ideasArray.push(newIdea);                                                     //put the new object in the storage array
-  localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray));         //stringify and put the array in local storage                                                    
-  generateHTML(newIdea);                                                        //run the template-literal HTML injection
-  titleInput.val('');                                                           //clear out the title and body fields
-  bodyInput.val('');
-};
+  if(titleInput.val().length > 0 && bodyInput.val().length > 0) {
+    e.preventDefault();
+    var titleValue = titleInput.val();                                            
+    var bodyValue = bodyInput.val();
+    var newIdea = new IdeaConstructor(Date.now(), titleValue, bodyValue);         //run the constructor function
+    ideasArray.push(newIdea);                                                     //put the new object in the storage array
+    localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray));         //stringify and put the array in local storage                                                    
+    generateHTML(newIdea);                                                        //run the template-literal HTML injection
+    titleInput.val('');                                                           //clear out the title and body fields
+    bodyInput.val('');
+    submitButton.css('backgroundColor', '#CCCCCC');
+  } else {
+    alert('you dum');
+  }
+}
 
 function IdeaConstructor(id, title, body) {
   this.id = id;
@@ -120,7 +118,6 @@ function IdeaConstructor(id, title, body) {
   this.body = body;
   this.quality = "swill";
 }
-
 
 function generateHTML (object){
   ideaSection.append(`<article data-index="${object.id}">
@@ -201,5 +198,11 @@ function updateBody(e) {
       workingObject.title = event.target.innerText;
       localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray)); 
 } 
+
+function populateContent() {
+  ideasArray.forEach(function(idea) {
+    generateHTML(idea);
+  });
+}
 
 

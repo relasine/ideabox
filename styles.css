@@ -47,13 +47,17 @@ p {
 }
 
 .submit-button {
-  background-color: #00a79d;
+  background-color: #CCCCCC;
   color: #fff;
   width: 55.3%;
   margin-top: .6rem;
   margin-bottom: .7rem;
   height: 1.5rem;
   border-width: 0;
+}
+
+.submit-button:disabled {
+  background-color: #CCCCCC;
 }
 
 .title-input, .body-input, .search {

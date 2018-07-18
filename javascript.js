@@ -5,6 +5,7 @@ var ideaSection = $('.idea-section');
 var submitButton = $('.submit-button');
 var titleInput = $('.title-input');
 var bodyInput = $('.body-input');
+var searchInput = $('.search');
 var ideasArray = JSON.parse(localStorage.getItem("storedIdeasArray")) || [];
 
 ideasArray.forEach(function(idea) {
@@ -23,6 +24,8 @@ ideasArray.forEach(function(idea) {
   </article>`);
 })
 
+$('.title-input').on('keyup', saveButtonEnable);
+$('.body-input').on('keyup', saveButtonEnable);
 $('.idea-section').on('mouseover', deleteHover);
 $('.idea-section').on('mouseout', deleteNoHover);
 $('.idea-section').on('mouseover', downvoteHover);
@@ -31,6 +34,17 @@ $('.idea-section').on('mouseover', upvoteHover);
 $('.idea-section').on('mouseout', upvoteNoHover);
 $('.idea-section').on('click', deleteExecute);
 $('.submit-button').on('click', submitExecute);
+$('.search').on('keyup', searchExecute);
+
+function saveButtonEnable() {
+  if(titleInput.val().length > 0 && bodyInput.val().length > 0) {
+    submitButton.prop("disabled", false);
+    console.log('true');
+  } else {
+    submitButton.prop("disabled", true);;
+    console.log('false)')
+  }
+}
 
 function deleteHover(e) {
   if ($(e.target).hasClass('delete-button')){
@@ -62,23 +76,10 @@ function upvoteNoHover(e) {
     $(e.target).attr('src', 'images/upvote.svg');
 }};
 
-// ideaSection.on('click', function(e){                                         Delete function logic as anonymous function/eListener
-//   if ($(e.target).hasClass('delete-button')){
-//     $(e.target.closest('article').remove());
-//    var dataId = e.target.parentNode.parentNode.dataset.index;
-//    var ideaObject = ideasArray.find(function(idea) {
-//     return idea.id === parseInt(dataId)
-//    }) 
-//    var index = ideasArray.indexOf(ideaObject)
-//    ideasArray.splice(index, 1)
-//   localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray));
-//   }
-// });
-
 function deleteExecute(e) {
   if($(e.target).hasClass('delete-button')) {                                   //target the clicked element by class
     $(e.target.closest('article').remove());                                    //remove the clicked element's parent.parent element
-    var dataId = e.target.parentNode.parentNode.dataset.index;                  //assign the parent element's unique id to a variable
+    var dataId = e.target.parentNode.parentNode.dataset.index;                  //assign the parent element's unique id to a variable - need to convert to jQuery
     var ideaObject = ideasArray.find(function(idea) {                           //find the cooresponding object on the storage array and assign to a variable
       return idea.id === parseInt(dataId);                        
     });
@@ -130,5 +131,23 @@ function generateHTML (object){
   </article>`);
 }
 
+// function searchExecute() {             working sort of
+//   var searchText = searchInput.value
+//   var searchResultsArray = ideasArray.filter(function(query) {
+//     return Object.values(query).indexOf(searchText) > -1;
+//   });
+//   console.log(searchResultsArray);
+// }
+
+function searchExecute(searchInput) {
+ var query = $(this).val();                                           //store the search field text.value as a variable.
+ $('article').each(function() {                                       //use the callback function each() on all article elements
+   if($(this).text().search(new RegExp(query, 'i')) !== -1) {         //search the article for the search field text.value
+     $(this).fadeIn();                                                //if it does contain the text, fadeIN()
+   } else {
+     $(this).fadeOut();                                               //if not, fadeOut();
+   }
+ });
+}
 
 

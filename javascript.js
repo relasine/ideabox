@@ -12,9 +12,9 @@ ideasArray.forEach(function(idea) {
   ideaSection.append(`<article data-index="${idea.id}">
     <div class="wrapper-div">
        <img class="delete-button" aria-label="delete button" src="images/delete.svg">
-      <h3>${idea.title}</h3>
+      <h3 class="idea-title" contenteditable="true" onfocusout="updateTitle()">${idea.title}</h3>
     </div>
-    <p class="idea-body">${idea.body}</p>
+    <p class="idea-body" contenteditable="true">${idea.body}</p>
     <div class="button-quality-wrapper clearfix">
       <img class="upvote" src="images/upvote.svg">
       <img class="downvote" src="images/downvote.svg">
@@ -35,14 +35,14 @@ $('.idea-section').on('mouseout', upvoteNoHover);
 $('.idea-section').on('click', deleteExecute);
 $('.submit-button').on('click', submitExecute);
 $('.search').on('keyup', searchExecute);
+$('.idea-section').on('click', upVoteExecute);
+$('.idea-section').on('click', downVoteExecute);
 
 function saveButtonEnable() {
   if(titleInput.val().length > 0 && bodyInput.val().length > 0) {
     submitButton.prop("disabled", false);
-    console.log('true');
   } else {
     submitButton.prop("disabled", true);;
-    console.log('false)')
   }
 }
 
@@ -119,9 +119,9 @@ function generateHTML (object){
   ideaSection.append(`<article data-index="${object.id}">
     <div class="wrapper-div">
        <img class="delete-button" aria-label="delete button" src="images/delete.svg">
-      <h3>${object.title}</h3>
+      <h3 class="idea-title" contenteditable="true">${object.title}</h3>
     </div>
-    <p class="idea-body">${object.body}</p>
+    <p class="idea-body" contenteditable="true">${object.body}</p>
     <div class="button-quality-wrapper clearfix">
       <img class="upvote" src="images/upvote.svg">
       <img class="downvote" src="images/downvote.svg">
@@ -131,23 +131,60 @@ function generateHTML (object){
   </article>`);
 }
 
-// function searchExecute() {             working sort of
-//   var searchText = searchInput.value
-//   var searchResultsArray = ideasArray.filter(function(query) {
-//     return Object.values(query).indexOf(searchText) > -1;
-//   });
-//   console.log(searchResultsArray);
-// }
-
-function searchExecute(searchInput) {
- var query = $(this).val();                                           //store the search field text.value as a variable.
+function searchExecute() {
  $('article').each(function() {                                       //use the callback function each() on all article elements
-   if($(this).text().search(new RegExp(query, 'i')) !== -1) {         //search the article for the search field text.value
-     $(this).fadeIn();                                                //if it does contain the text, fadeIN()
+   if($(this).text().search(new RegExp($(searchInput).val(), 'i')) !== -1) {         //search article(s) for the search field text.value - "i" indicates not case-sensitive
+     $(this).slideDown();                                                //if it does contain the text, slideDown()
    } else {
-     $(this).fadeOut();                                               //if not, fadeOut();
+     $(this).slideUp();                                               //if not, slideUp();
    }
  });
+}
+
+function upVoteExecute(e) {
+  if($(e.target).hasClass('upvote')) {  
+    var workingID = e.target.parentNode.parentNode.dataset.index;
+    var workingObject = ideasArray.find(function(idea){ 
+      return idea.id === parseInt(workingID);  
+    });
+    if(workingObject.quality === "swill") {
+      workingObject.quality = "plausible";
+      localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray)); 
+      e.target.parentNode.childNodes[5].childNodes[1].innerText = "plausible";
+    } else if (workingObject.quality === "plausible") {
+      workingObject.quality = "genius";
+      localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray)); 
+      e.target.parentNode.childNodes[5].childNodes[1].innerText = "genius";
+    }
+  }
+}
+
+function downVoteExecute(e) {
+  if($(e.target).hasClass('downvote')) {  
+    var workingID = e.target.parentNode.parentNode.dataset.index;
+    var workingObject = ideasArray.find(function(idea){ 
+      return idea.id === parseInt(workingID);  
+    });
+    if(workingObject.quality === "genius") {
+      workingObject.quality = "plausible";
+      localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray)); 
+      e.target.parentNode.childNodes[5].childNodes[1].innerText = "plausible";
+    } else if (workingObject.quality === "plausible") {
+      workingObject.quality = "swill";
+      localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray)); 
+      e.target.parentNode.childNodes[5].childNodes[1].innerText = "swill";
+    }
+  }
+}
+
+function updateTitle(e) {
+  console.log(working);
+  var workingID = e.target.parentNode.parentNode.dataset.index;
+  var workingObject = ideasArray.find(function(idea){ 
+    return idea.id === parseInt(workingID);  
+  });
+    workingObject.title = $('idea-title').val();
+    localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray)); 
 }
 
 

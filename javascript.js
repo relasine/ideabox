@@ -108,7 +108,7 @@ function submitExecute(e) {
     bodyInput.val('');
     submitButton.css('backgroundColor', '#CCCCCC');
   } else {
-    alert('you dum');
+    alert('Please enter text in the title and body fields.');
   }
 }
 

@@ -134,13 +134,13 @@ function generateHTML (object){
 }
 
 function searchExecute() {
- $('article').each(function() {                                       //use the callback function each() on all article elements
-   if($(this).text().search(new RegExp($(searchInput).val(), 'i')) !== -1) {         //search article(s) for the search field text.value - "i" indicates not case-sensitive
-     $(this).slideDown();                                                //if it does contain the text, slideDown()
-   } else {
-     $(this).slideUp();                                               //if not, slideUp();
-   }
- });
+  $('article').each(function() {
+    if($(this).text().toLowerCase().indexOf($(searchInput).val().toLowerCase()) !== -1) {
+      $(this).slideDown();
+    } else {
+      $(this).slideUp();
+    }
+  });
 }
 
 function upVoteExecute(e) {

@@ -26,17 +26,9 @@ $('.idea-section').on('click', downVoteExecute);
 
 function preventReturn(event) {
   if (event.keyCode == 10 || event.keyCode == 13) {
-        event.preventDefault();
+    event.preventDefault();
   }
 }
-
-// function saveButtonEnable() {
-//   if(titleInput.val().length > 0 && bodyInput.val().length > 0) {
-//     submitButton.prop("disabled", false);
-//   } else {
-//     submitButton.prop("disabled", true);;
-//   }
-// }
 
 function saveButtonEnable() {
   if(titleInput.val().length > 0 && bodyInput.val().length > 0) {
@@ -49,32 +41,38 @@ function saveButtonEnable() {
 function deleteHover(e) {
   if ($(e.target).hasClass('delete-button')){
     $(e.target).attr('src', 'images/delete-hover.svg');
-}};
+  }
+}
 
 function deleteNoHover(e) {
   if ($(e.target).hasClass('delete-button')){
     $(e.target).attr('src', 'images/delete.svg');
-}};
+  } 
+}
 
 function downvoteHover(e) {
   if ($(e.target).hasClass('downvote')){
     $(e.target).attr('src', 'images/downvote-hover.svg');
-}};
+  }
+}
 
 function downvoteNoHover(e) {
   if ($(e.target).hasClass('downvote')){
     $(e.target).attr('src', 'images/downvote.svg');
-}};
+  } 
+}
 
 function upvoteHover(e) {
   if ($(e.target).hasClass('upvote')){
     $(e.target).attr('src', 'images/upvote-hover.svg');
-}};
+  }
+}
 
 function upvoteNoHover(e) {
-    if ($(e.target).hasClass('upvote')){
+  if ($(e.target).hasClass('upvote')){
     $(e.target).attr('src', 'images/upvote.svg');
-}};
+  }
+}
 
 function deleteExecute(e) {
   if($(e.target).hasClass('delete-button')) {                                   //target the clicked element by class
@@ -185,7 +183,7 @@ function updateTitle(e) {
   var workingID = event.target.parentNode.parentNode.dataset.index;
     var workingObject = ideasArray.find(function(idea){ 
       return idea.id === parseInt(workingID);  
-   });
+    });
       workingObject.title = event.target.innerText;
       localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray)); 
 } 
@@ -194,7 +192,7 @@ function updateBody(e) {
   var workingID = event.target.parentNode.parentNode.dataset.index;
     var workingObject = ideasArray.find(function(idea){ 
       return idea.id === parseInt(workingID);  
-   });
+    });
       workingObject.title = event.target.innerText;
       localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray)); 
 } 

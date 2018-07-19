@@ -6,17 +6,15 @@ body {
 
 header {
   background-color: #e5f3f2;
-
 }
 
 h1 {
   color: #00a79d;
   font-family: 'Roboto Slab', serif;
-  text-align: center;
+  margin-bottom: 0;
   margin-top: 0;
   padding: 1rem;
-  margin-bottom: 0;
-  font-size: 
+  text-align: center;
 }
 
 span {
@@ -35,11 +33,10 @@ p {
 }
 
 .body-input {
-  resize: none;
   height: .8125rem;
-  padding: 1px;
   line-height: 12px;
-
+  padding: 1px;
+  resize: none;
 }
 
 ::placeholder {
@@ -48,12 +45,12 @@ p {
 
 .submit-button {
   background-color: #CCCCCC;
+  border-width: 0;
   color: #fff;
-  width: 55.3%;
+  height: 1.5rem;
   margin-top: .6rem;
   margin-bottom: .7rem;
-  height: 1.5rem;
-  border-width: 0;
+  width: 55.3%;
 }
 
 .submit-button:focus {
@@ -61,9 +58,9 @@ p {
 }
 
 .title-input, .body-input, .search {
-  margin-top: .5rem;
-  margin-bottom: .5rem;
   border: 1px solid lightgray;
+  margin-bottom: .5rem;
+  margin-top: .5rem;
 }
 
 .title-input {
@@ -83,9 +80,9 @@ img {
 }
 
 h3 {
-   font-family: 'Roboto Slab', serif;
-   color: #6d6e71;
-   margin-bottom: .5rem;
+  color: #6d6e71;
+  font-family: 'Roboto Slab', serif;
+  margin-bottom: .5rem;
 
 }
 
@@ -101,8 +98,8 @@ article {
 
 .idea-body {
   color: #939598;
-  margin-top: 0;
   font-size: .9rem;
+  margin-top: 0;
 }
 
 .quality {
@@ -111,7 +108,6 @@ article {
   margin: 0;
   float: left;
   font-family: 'Roboto Slab', serif;
-
 }
 
 .upvote, .downvote {
@@ -120,14 +116,10 @@ article {
   margin-right: 1rem;
 }
 
-.button-quality-wrapper {
-
-}
-
 .clearfix::after {
+  clear: both;
   content: "";
   display: table;
-  clear: both;
 }
 
 .active-quality {
@@ -142,40 +134,24 @@ hr {
   .title-input, .body-input, .search, article {
     max-width: 48.125rem;
   }
+
   .submit-button {
     max-width: 48.3875rem;
   }
 }
 
-/*@media(max-width: 700px) {
-  .title-input, .body-input, .search, article { 
-    width: 90%;
-
-  }
-  .submit-button {
-    width: 90%;
-
-  }
-}*/
-
-
-
 @media(max-width: 700px) {
- .title-input, .body-input, .search, article{
-   min-width: 24.0625rem;
+  .title-input, .body-input, .search, article{
+    min-width: 24.0625rem;
  }
-.body-input {
-  height: 2.4375rem;
-  padding-top: 0;
 
+  .body-input {
+    height: 2.4375rem;
+    padding-top: 0;
 }
 
-::placeholder {
-
-}
-
- .submit-button {
-   min-width: 24.19375rem;
+  .submit-button {
+    min-width: 24.19375rem;
  }
 }
 
@@ -183,7 +159,8 @@ hr {
   .title-input, .body-input, .search, article{
     min-width: 92.326%;
   }
+  
   .submit-button {
-  min-width: 92.829%;
-}
+    min-width: 92.829%;
+  }
 }

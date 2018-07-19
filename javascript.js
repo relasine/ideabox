@@ -118,12 +118,12 @@ function IdeaConstructor(id, title, body) {
 }
 
 function generateHTML (object){
-  ideaSection.append(`<article data-index="${object.id}">
+  ideaSection.prepend(`<article data-index="${object.id}">
     <div class="wrapper-div">
        <img class="delete-button" aria-label="delete button" src="images/delete.svg">
-      <h3 class="idea-title" contenteditable="true" onfocusout="updateTitle()">${object.title}</h3>
+      <h3 class="idea-title" contenteditable="true" onkeydown="enterTitleUpdate()" onfocusout="updateTitle()">${object.title}</h3>
     </div>
-    <p class="idea-body" contenteditable="true" onfocusout="updateBody()">${object.body}</p>
+    <p class="idea-body" contenteditable="true" onkeydown="enterBodyUpdate()" onfocusout="updateBody()">${object.body}</p>
     <div class="button-quality-wrapper clearfix">
       <img class="upvote" src="images/upvote.svg">
       <img class="downvote" src="images/downvote.svg">
@@ -181,20 +181,46 @@ function downVoteExecute(e) {
 
 function updateTitle(e) { 
   var workingID = event.target.parentNode.parentNode.dataset.index;
+  var workingObject = ideasArray.find(function(idea){ 
+    return idea.id === parseInt(workingID);  
+  });
+    workingObject.title = event.target.innerText;
+    localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray)); 
+} 
+
+function enterTitleUpdate(e) { 
+  if (event.keyCode == 10 || event.keyCode == 13) {
+    event.preventDefault();
+    var workingID = event.target.parentNode.parentNode.dataset.index;
     var workingObject = ideasArray.find(function(idea){ 
       return idea.id === parseInt(workingID);  
     });
       workingObject.title = event.target.innerText;
       localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray)); 
+      document.activeElement.blur()
+  }
 } 
 
 function updateBody(e) { 
-  var workingID = event.target.parentNode.parentNode.dataset.index;
+  var workingID = event.target.parentNode.dataset.index;
+  var workingObject = ideasArray.find(function(idea){ 
+      return idea.id === parseInt(workingID);  
+  });
+      workingObject.body = event.target.innerText;
+      localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray)); 
+} 
+
+function enterBodyUpdate(e) { 
+  if (event.keyCode == 10 || event.keyCode == 13) {
+    event.preventDefault();
+    var workingID = event.target.parentNode.dataset.index;
     var workingObject = ideasArray.find(function(idea){ 
       return idea.id === parseInt(workingID);  
     });
-      workingObject.title = event.target.innerText;
+      workingObject.body = event.target.innerText;
       localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray)); 
+      document.activeElement.blur()
+  }
 } 
 
 function populateContent() {

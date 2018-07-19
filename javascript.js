@@ -75,19 +75,19 @@ function upvoteNoHover(e) {
 }
 
 function deleteExecute(e) {
-  if($(e.target).hasClass('delete-button')) {                                   //target the clicked element by class
-    $(e.target.closest('article').remove());                                    //remove the clicked element's parent.parent element
-    var dataId = e.target.parentNode.parentNode.dataset.index;                  //assign the parent element's unique id to a variable - need to convert to jQuery
-    var ideaObject = ideasArray.find(function(idea) {                           //find the cooresponding object on the storage array and assign to a variable
+  if($(e.target).hasClass('delete-button')) {                                   
+    $(e.target.closest('article').remove());                                    
+    var dataId = e.target.parentNode.parentNode.dataset.index;                  
+    var ideaObject = ideasArray.find(function(idea) {                           
       return idea.id === parseInt(dataId);                        
     });
-    var index = ideasArray.indexOf(ideaObject);                                 //identify the object's index and assign to a variable
-    if(index === 0) {                                                           //If the object's index is 0    
-      ideasArray.shift();                                                       //Use shift to remove it
+    var index = ideasArray.indexOf(ideaObject);                                 
+    if(index === 0) {                                                              
+      ideasArray.shift();                                                       
     } else {                      
-      ideasArray.splice(index, 1);                                              //Otherwise, use splice to remove the object 
+      ideasArray.splice(index, 1);                                              
     }                                                               
-    localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray));       //stringify and put the updated array in local storage
+    localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray));       
   }
 }
 
@@ -98,11 +98,11 @@ function submitExecute(e) {
     e.preventDefault();
     var titleValue = titleInput.val();                                            
     var bodyValue = bodyInput.val();
-    var newIdea = new IdeaConstructor(Date.now(), titleValue, bodyValue);         //run the constructor function
-    ideasArray.push(newIdea);                                                     //put the new object in the storage array
-    localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray));         //stringify and put the array in local storage                                                    
-    generateHTML(newIdea);                                                        //run the template-literal HTML injection
-    titleInput.val('');                                                           //clear out the title and body fields
+    var newIdea = new IdeaConstructor(Date.now(), titleValue, bodyValue);         
+    ideasArray.push(newIdea);                                                     
+    localStorage.setItem('storedIdeasArray', JSON.stringify(ideasArray));                                                         
+    generateHTML(newIdea);                                                        
+    titleInput.val('');                                                           
     bodyInput.val('');
     submitButton.css('backgroundColor', '#CCCCCC');
   } else {

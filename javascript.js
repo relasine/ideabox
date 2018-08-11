@@ -12,12 +12,6 @@ $(window).on('load', populateContent);
 $('.title-input').on('keyup', saveButtonEnable);
 $('.body-input').on('keyup', saveButtonEnable);
 $('.body-input').on('keydown', preventReturn);
-$('.idea-section').on('mouseover', deleteHover);
-$('.idea-section').on('mouseout', deleteNoHover);
-$('.idea-section').on('mouseover', downvoteHover);
-$('.idea-section').on('mouseout', downvoteNoHover);
-$('.idea-section').on('mouseover', upvoteHover);
-$('.idea-section').on('mouseout', upvoteNoHover);
 $('.idea-section').on('click', deleteExecute);
 $('.submit-button').on('click', submitExecute);
 $('.search').on('keyup', searchExecute);
@@ -35,42 +29,6 @@ function saveButtonEnable() {
   submitButton.css('backgroundColor', '#00a79d');
   } else {
   submitButton.css('backgroundColor', '#CCCCCC');
-  }
-}
-
-function deleteHover(e) {
-  if ($(e.target).hasClass('delete-button')){
-    $(e.target).attr('src', 'images/delete-hover.svg');
-  }
-}
-
-function deleteNoHover(e) {
-  if ($(e.target).hasClass('delete-button')){
-    $(e.target).attr('src', 'images/delete.svg');
-  } 
-}
-
-function downvoteHover(e) {
-  if ($(e.target).hasClass('downvote')){
-    $(e.target).attr('src', 'images/downvote-hover.svg');
-  }
-}
-
-function downvoteNoHover(e) {
-  if ($(e.target).hasClass('downvote')){
-    $(e.target).attr('src', 'images/downvote.svg');
-  } 
-}
-
-function upvoteHover(e) {
-  if ($(e.target).hasClass('upvote')){
-    $(e.target).attr('src', 'images/upvote-hover.svg');
-  }
-}
-
-function upvoteNoHover(e) {
-  if ($(e.target).hasClass('upvote')){
-    $(e.target).attr('src', 'images/upvote.svg');
   }
 }
 
@@ -119,14 +77,12 @@ function IdeaConstructor(id, title, body) {
 
 function generateHTML (object){
   ideaSection.prepend(`<article data-index="${object.id}">
-    <div class="wrapper-div">
-       <img class="delete-button" aria-label="delete button" src="images/delete.svg">
-      <h3 class="idea-title" contenteditable="true" onkeydown="enterTitleUpdate()" onfocusout="updateTitle()">${object.title}</h3>
-    </div>
+    <h3 class="idea-title" contenteditable="true" onkeydown="enterTitleUpdate()" onfocusout="updateTitle()">${object.title}</h3>
+    <div class="delete-button" aria-label="delete button"></div>
     <p class="idea-body" contenteditable="true" onkeydown="enterBodyUpdate()" onfocusout="updateBody()">${object.body}</p>
     <div class="button-quality-wrapper clearfix">
-      <img class="upvote" src="images/upvote.svg">
-      <img class="downvote" src="images/downvote.svg">
+      <div class="upvote"></div>
+      <div class="downvote"></div>
       <p class="quality">quality: <span class="active-quality">${object.quality}</span></p>
     </div>
     <hr>

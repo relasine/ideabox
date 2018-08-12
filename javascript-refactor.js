@@ -19,7 +19,7 @@ searchInput.addEventListener('keyup', searchExecute);
 checkInputs();
 retrieveContent();
 
-function changeQuality() {
+function changeQualityUp() {
   if (event.target.classList.contains('upvote') && event.target.parentNode.childNodes[5].childNodes[1].innerText === "swill") {
     event.target.parentNode.childNodes[5].childNodes[1].innerText = "plausible"
     let key = event.target.parentNode.parentNode.dataset.index;
@@ -28,7 +28,11 @@ function changeQuality() {
     event.target.parentNode.childNodes[5].childNodes[1].innerText = "genius"
     let key = event.target.parentNode.parentNode.dataset.index;
     updateQuality(key, "genius");
-  } else if (event.target.classList.contains('downvote') && event.target.parentNode.childNodes[5].childNodes[1].innerText === "plausible") {
+  }
+}
+
+function changeQualityDown() {
+  if (event.target.classList.contains('downvote') && event.target.parentNode.childNodes[5].childNodes[1].innerText === "plausible") {
     event.target.parentNode.childNodes[5].childNodes[1].innerText = "swill"
     let key = event.target.parentNode.parentNode.dataset.index;
     updateQuality(key, "swill");
@@ -94,7 +98,8 @@ function IdeaConstructor(id, title, body) {
 
 function masterClick() {
   deleteExecute();
-  changeQuality();
+  changeQualityUp();
+  changeQualityDown();
 }
 
 function preventReturn(event) {
